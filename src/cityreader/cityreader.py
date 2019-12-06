@@ -7,6 +7,9 @@ class City:
     self.lat = lat
     self.lon = lon
 
+  def __repr__(self):
+    return f"<City: {self.name}, {self.lat}, {self.lon}>"
+
 
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
@@ -30,29 +33,20 @@ def cityreader(cities=[]):
 
   with open('cityreader/cities.csv', 'r') as file:
     reader = csv.reader(file)
-    header = next(reader) #Magically removes header from the csv file imported!
-
-    # count = 0
+    next(reader) #Magically removes header from the csv file imported!
 
     for row in reader:
-      cities.append(row)
-      # if count > 5:
-      #   break
-      # count += 1
-
+      rows = City(row[0], float(row[3]), float(row[4]))
+      cities.append(rows)
     
     return cities
-    # print(cities)
 
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
-
-
 for c in cities:
-  selected_cities = (c[0] + ', ' + c[4] + ', ' + c[5])
-  print(selected_cities)
-  dir(selected_cities)
+  print(c)
+  
 
 # STRETCH GOAL!
 #

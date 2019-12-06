@@ -1,1 +1,1 @@
-i.name.upper(), i.age + 5
+i.name.upper() and i.age + 5
