@@ -1,0 +1,1 @@
+i.name.upper(), i.age + 5
