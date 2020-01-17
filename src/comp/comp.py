@@ -21,6 +21,8 @@ humans = [
     Human("David", 31),
 ]
 
+print(type(humans))
+
 # Write a list comprehension that creates a list of names of everyone
 # whose name starts with 'D':
 print("Starts with D:")
