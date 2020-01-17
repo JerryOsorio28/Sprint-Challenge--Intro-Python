@@ -46,7 +46,7 @@ cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
 # for c in cities:
-#     print(c)
+#     print(type(c))
 
 # STRETCH GOAL!
 #
@@ -64,8 +64,6 @@ cityreader(cities)
 # change the results of what the `cityreader_stretch` function returns.
 #
 # Example I/O:
-# (city.lat <= lat1 and city.lat >= lat2 and city.lon <= lon1 and city.lon >= lon2):
-
 # Enter lat1,lon1: 45,-100 (lat1 greater, lon1 greater)
 # Enter lat2,lon2: 32,-120 (lat2 less, lon2 less)
 # Albuquerque: (35.1055,-106.6476)
@@ -84,14 +82,25 @@ first_lat_lon = first_response.split(',')
 nums = [int(num) for num in first_lat_lon]
 lat1 = nums[0]
 lon1 = nums[1]
-# print('first lat lon', lat1, lon1)
+print('first lat lon', lat1, lon1)
 
 second_response = input('type the second coordinates, each separated by a comma ~~> ')
 second_lat_lon = second_response.split(',')
 nums = [int(num) for num in second_lat_lon]
 lat2 = nums[0]
 lon2 = nums[1]
-# print('second lat lon', lat2, lon2)
+print('second lat lon', lat2, lon2)
+
+# if(lat1 < lat2 and lon1 < lon2):
+#   temp_lat1 = lat1
+#   temp_lon1 = lon1
+#   lat1 = lat2
+#   lon1 = lon2
+#   lat2 = temp_lat1
+#   lon2 = temp_lon1
+
+# print('lat1 and lon 1', lat1, lon1)
+# print('lat2 and lon 2', lat2, lon2)
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # within will hold the cities that fall within the specified region
@@ -103,13 +112,23 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
 
   # iterate over cities array on index 1 and 2 (lat, lon)
   for city in cities:
-  # we have to print anything in city.lat less than lat1 and in city.lon anything less than lon1
-  # as well as print anything in coords.lat less than lat2 and in coords.lon anything less than lon2
-    if(city.lat <= lat1 and city.lat >= lat2 and city.lon <= lon1 and city.lon >= lon2):
+  # we have to append to within array anything in city.lat less than lat1 and in city.lon anything less than lon1
+  # as well as append to within array anything in city.lat less than lat2 and in city.lon anything less than lon2
+    if(city.lat <= lat1 and city.lon <= lon1 and city.lat >= lat2 and city.lon >= lon2):
       within.append(city)
-      # print('cities that meet requirements', city)
-  # for i in within:
-  #   print(i)
+  # This checks if the inputs were typed in passing lat2 and lon2 first, if it did, it reverts the values so that lat1 and lon1 always comes first.
+    elif(city.lat >= lat1 and city.lon >= lon1 and city.lat <= lat2 and city.lon <= lon2):
+      temp_lat1 = lat1
+      temp_lon1 = lon1
+      lat1 = lat2
+      lon1 = lon2
+      lat2 = temp_lat1
+      lon2 = temp_lon1
+      within.append(city)
+
   return within
 
-cityreader_stretch(45,-100, 32,-120, cities)
+cityreader_stretch(45, -100, 32, -120, cities)
+                #lat1, lon1 // lat2, lon2
+cityreader_stretch(32, -120, 45, -100, cities)
+                #lat2, lon2 // lat1, lon1  
